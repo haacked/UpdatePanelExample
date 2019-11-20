@@ -34,6 +34,13 @@ namespace MvcExplorations.Pages
             }
 
             TheMessage = $"Yay, you posted '{TheValue}'";
+
+            if (Request.IsAjaxRequest())
+            {
+                // Typically you'd return a partial here.
+                return Content(TheMessage);
+            }
+
             return Page();
         }
     }

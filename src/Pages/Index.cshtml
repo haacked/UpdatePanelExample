@@ -13,7 +13,7 @@
     @Model.TheMessage
 </div>
 
-<form method="post">
+<form method="post" data-update-target-selector="#the-message">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="@Model.TheValue"></label>
@@ -22,3 +22,4 @@
     </div>
     <input type="submit" value="Submit"/>
 </form>
+      
