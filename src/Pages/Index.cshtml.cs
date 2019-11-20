@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -17,9 +14,27 @@ namespace MvcExplorations.Pages
             _logger = logger;
         }
         
-        public void OnGet()
-        {
+        [Required]
+        [BindProperty]
+        public string TheValue { get; set; }
+        
+        public string TheMessage { get; private set; }
 
+        public IActionResult OnGet()
+        {
+            TheMessage = "Nothing yet";
+            return Page();
+        }
+
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return OnGet();
+            }
+
+            TheMessage = $"Yay, you posted '{TheValue}'";
+            return Page();
         }
     }
 }

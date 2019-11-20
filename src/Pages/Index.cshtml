@@ -9,3 +9,16 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+<div id="the-message" class="flash">
+    @Model.TheMessage
+</div>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="@Model.TheValue"></label>
+        <input asp-for="@Model.TheValue" />
+        <span asp-validation-for="@Model.TheValue" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Submit"/>
+</form>
