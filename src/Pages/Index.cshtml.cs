@@ -38,7 +38,7 @@ namespace MvcExplorations.Pages
             if (Request.IsAjaxRequest())
             {
                 // Typically you'd return a partial here.
-                return Content(TheMessage);
+                return Content($"<li>{TheMessage}</li>");
             }
 
             return Page();

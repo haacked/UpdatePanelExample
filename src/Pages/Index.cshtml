@@ -9,11 +9,11 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-<div id="the-message" class="flash">
-    @Model.TheMessage
-</div>
+<ul id="the-message" class="flash">
+    <li>@Model.TheMessage</li>
+</ul>
 
-<form method="post" data-update-target-selector="#the-message">
+<form method="post" data-update-target-selector="#the-message" data-update-type="append">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="@Model.TheValue"></label>

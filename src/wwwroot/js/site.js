@@ -22,6 +22,7 @@ document.querySelectorAll('form[data-update-target-selector]')
         if (form.submitter) {
             formData.append(form.submitter.name, form.submitter.value);
             form.submitter.setAttribute('disabled', 'disabled');
+            form.submitter.classList.add('loading');
         }
         fetch(form.action, {
             method: 'POST',
@@ -33,6 +34,7 @@ document.querySelectorAll('form[data-update-target-selector]')
         .then(response => {
             if (form.submitter) {
                 form.submitter.removeAttribute('disabled');
+                form.submitter.classList.remove('loading');
         }
         if (!response.ok) throw response;
             return response.text()
@@ -40,7 +42,15 @@ document.querySelectorAll('form[data-update-target-selector]')
              const updateTarget = form.querySelector(form.dataset.updateTargetSelector)
                 || document.querySelector(form.dataset.updateTargetSelector);
             if (updateTarget) {
-                updateTarget.innerHTML = html
+                const updateType = form.dataset.updateType || 'replace';
+                if (updateType === 'replace') {
+                    updateTarget.innerHTML = html
+                }
+                else /* append */ {
+                    const div = document.createElement('div');
+                    div.innerHTML = html;
+                    updateTarget.appendChild(div.firstChild);
+                }
             }
             // Clear inputs
             form.reset();
